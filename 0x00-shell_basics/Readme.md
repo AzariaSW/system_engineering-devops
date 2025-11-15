@@ -1,6 +1,6 @@
 ## Shell commands
 
-- [print working directory]([https://github/AzariaSW/system_engineering-devops/0x00-shell_basics/0-current_working_directory](https://github.com/AzariaSW/system_engineering-devops/blob/main/0x00-shell_basics/1-listit))  
+- [print working directory](https://github.com/AzariaSW/system_engineering-devops/blob/main/0x00-shell_basics/1-listit)  
 
 - [list]([./1-listit)
   
