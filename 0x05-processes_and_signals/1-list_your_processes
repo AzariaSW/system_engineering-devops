@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-ps -eo user=,pid=,etimes=,pcpu=,comm= --no-headers | while read -r user pid etime pcpu cmd; do
-    # Format STARTED as "Day.microseconds" (using etime for seconds since start)
-    day=$(date +%a)                 # e.g., Wed
-    micro=$(printf "%06d" $((etime*1000000 % 1000000)))
-    echo "$user $day.$etime $micro $pcpu"
-done
+ps -e -o user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest
