@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # listing process with details in user oriented manner
 
-ps -axo uid,cmd --forest
+ps -eo uid,args
