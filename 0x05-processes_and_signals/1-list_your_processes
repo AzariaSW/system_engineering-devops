@@ -1,33 +1,10 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-print_tree() {
-    local parent_pid=$1
-    local indent=$2
+printf "%-8s %-5s %-8s %s\n" "USER" "PID" "START" "COMMAND"
 
-    # Get all child processes of the parent PID
-    local children
-    children=$(ps -eo pid,ppid,user,%cpu,%mem,vsz,rss,tty,stat,start,time,cmd --no-headers | awk -v ppid="$parent_pid" '$2==ppid {print $0}')
-
-    while IFS= read -r line; do
-        pid=$(echo "$line" | awk '{print $1}')
-
-        # Print the process line with indentation
-        echo "${indent}${line}"
-
-        # Recurse into child processes
-        print_tree "$pid" "   $indent"
-    done <<< "$children"
-}
-
-# Print header
-echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"
-
-# Start with all root-level processes (PPID=0)
-root_processes=$(ps -eo pid,ppid,user,%cpu,%mem,vsz,rss,tty,stat,start,time,cmd --no-headers | awk '$2==0')
-
-while IFS= read -r line; do
-    pid=$(echo "$line" | awk '{print $1}')
-    echo "$line"
-    print_tree "$pid" "   "
-done <<< "$root_processes"
+# Use ps with selected columns and format them
+ps -eo user=,pid=,lstart=,cmd= --no-headers | while read -r user pid day month date time year cmd; do
+    start_time="$time"
+    printf "%-8s %-5s %-8s %s\n" "$user" "$pid" "$start_time" "$cmd"
+done
