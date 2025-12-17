@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   COMMAND"
+echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT STARTED   CMD"
 
 ps -e -o user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest
