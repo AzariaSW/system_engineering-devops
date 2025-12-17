@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
 # Stop the 4-to_infinity_and_beyond process without using kill or killall
 
-pids=$(pgrep -x 4-to_infinity_and_beyond)
-
-# Stop each PID using /proc
-for pid in $pids; do
-    echo "Stopping PID $pid"
-    echo 9 > /proc/$pid/oom_score_adj  # just an example signal alternative if kill is forbidden
-done
+pkill 4-to_infinity_and_beyond
