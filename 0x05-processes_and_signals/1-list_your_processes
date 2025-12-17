@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
 # Function to display processes in a hierarchical format
+
 display_process_tree() {
     # Get all processes with detailed information using ps
     # -e: select all processes
