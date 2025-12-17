@@ -1,0 +1,8 @@
+bin/bash
+# Stop the 4-to_infinity_and_beyond process without using kill or killall
+
+for pid in /proc/[0-9]*; do
+    exe=$(readlink "$pid/exe" 2>/dev/null)
+    if [[ "$exe" == *4-to_infinity_and_beyond* ]]; then
+    fi
+done
