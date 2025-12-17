@@ -1,21 +1,26 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-display_custom_processes() {
+display_custom_processes_with_seconds() {
     # Print the header exactly as specified
     printf "%-8s %-9s %s\n" "USER" "STARTED" "COMMAND"
     
-    # Get all processes and format them as requested
-    ps -e -o user:8,start:8,comm --no-headers --forest | while read user start command; do
-        # Skip empty lines
-        if [ -z "$user" ]; then
-            continue
-        fi
+    # Get all processes with lstart (full start time) and format it
+    ps -e -o user:8,lstart,comm --no-headers --forest | while read line; do
+        # Extract user (first 8 characters)
+        user=$(echo "$line" | cut -c 1-8 | sed 's/ *$//')
+        
+        # Extract the time part from lstart format "Mon Feb 13 03:40:32 2023"
+        # We want just the time part "03:40:32"
+        start_time=$(echo "$line" | grep -oE '[0-9]{2}:[0-9]{2}:[0-9]{2}' | head -1)
+        
+        # Extract command (everything after the date)
+        command=$(echo "$line" | sed 's/.*[0-9]\{4\} //')
         
         # Format the output
-        printf "%-8s %-9s %s\n" "$user" "$start" "$command"
+        printf "%-8s %-9s %s\n" "$user" "$start_time" "$command"
     done
 }
 
 # Main execution
-display_custom_processes
+display_custom_processes_with_seconds
