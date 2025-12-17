@@ -4,7 +4,7 @@
 pids=$(pgrep -x 4-to_infinity_and_beyond)
 
 # Loop through each PID and stop the process
-for pid in pids; do
+for pid in $pids; do
     # Send SIGTERM using /proc interface as kill is forbidden
     # This writes to the /proc/<pid>/oom_score_adj as a workaround
     # Standard alternative: use 'pkill' if allowed
