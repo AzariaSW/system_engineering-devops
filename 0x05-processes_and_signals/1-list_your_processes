@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-ps -e -o user,pid,pcpu,pmem,vsz,rss,tty,stat,etimes,cmd --forest | awk 'NR==1{print $0; next} {secs=$9; printf "%-8s %-5s %-4s %-4s %-7s %-6s %-7s %-4s %02d:%02d:%02d.%06d %s\n",$1,$2,$3,$4,$5,$6,$7,$8,int(secs/3600),int(secs%3600/60),secs%60,int(rand()*1000000),$10}'
-
+ps -e -o user,pid,pcpu,pmem,vsz,rss,tty,stat,lstart,cmd --forest | awk '{if(NR==1){print $0} else {split($6,s," "); t=$6; printf "%-8s %-5s %-4s %-4s %-7s %-6s %-7s %-4s %s.%06d %s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,int(rand()*1000000),$0}}'
