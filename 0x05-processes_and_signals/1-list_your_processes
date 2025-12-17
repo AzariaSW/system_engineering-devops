@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-ps -e -o user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest
+echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   COMMAND"
+
+# Print all processes with the requested fields
+ps -eo user=,pid=,pcpu=,pmem=,vsz=,rss=,tty=,stat=,lstart=,cmd= --no-headers | while read -r user pid pcpu pmem vsz rss tty stat mon day hhmmss year cmdrest; do
+    # Reconstruct the start time as HH:MM:SS
+    start_time=$(echo "$hhmmss")
+    # Reconstruct the command (everything after hhmmss and year)
+    cmd=$(echo "$cmdrest" | awk '{for(i=1;i<=NF;i++) printf $i " "; print ""}')
+    # Print row in a clean format
+    printf "%-10s %5s %4s %4s %6s %5s %-8s %-4s %s %s\n" "$user" "$pid" "$pcpu" "$pmem" "$vsz" "$rss" "$tty" "$stat" "$start_time" "$cmd"
+done
