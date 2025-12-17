@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # listing process with details in user oriented manner
 
-ps -e --forest -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,cmd
+ps -e --forest -o user=USER,start_time=STARTED,cmd=CMD
