@@ -3,12 +3,9 @@
 
 pids=$(pgrep -f 4-to_infinity_and_beyond)
 
-# If any PIDs are found, kill them
+# Kill each PID if found
 if [ -n "$pids" ]; then
     for pid in $pids; do
-        kill "$pid"
-        echo "Terminated process with PID $pid"
+        kill "$pid" 2>/dev/null
     done
-else
-    echo "No running 4-to_infinity_and_beyond process found."
 fi
