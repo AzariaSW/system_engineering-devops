@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
 # Stop the 4-to_infinity_and_beyond process without using kill or killall
 
-while true; do
-    # If the stop flag file exists, break the loop
-    if [ -f /tmp/stop_infinity ]; then
-        break
-    fi
-    echo "To infinity and beyond"
-    sleep 2
-done
+pkill 4-to_infinity_and_beyond
