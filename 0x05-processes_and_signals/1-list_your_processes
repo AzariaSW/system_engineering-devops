@@ -1,23 +1,4 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-ps -eo user,pid,ppid,%cpu,%mem,vsz,rss,tty,stat,lstart,time,cmd --sort=ppid,pid --no-headers | \
-while read -r user pid ppid cpu mem vsz rss tty stat day month date hour minute second year time_total cmdrest; do
-    # Build process tree indentation
-    # Count parents
-    indent=""
-    current_pid=$pid
-    while [ "$current_pid" != "1" ]; do
-        parent_pid=$(ps -o ppid= -p "$current_pid" 2>/dev/null)
-        [ -z "$parent_pid" ] && break
-        indent="\\_ $indent"
-        current_pid=$parent_pid
-    done
-
-    # Combine command
-    cmd="$cmdrest"
-
-    # Print formatted line
-    printf "%-10s %-5s %4s %4s %7s %6s %-7s %-4s %3s %-6s %s %s\n" \
-        "$user" "$pid" "$cpu" "$mem" "$vsz" "$rss" "$tty" "$stat" "$month$date" "$time_total" "$indent$cmd" 
-done
+ps -e -o user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest
