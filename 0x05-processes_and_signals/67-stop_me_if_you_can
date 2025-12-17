@@ -1,23 +1,4 @@
 #!/usr/bin/env bash
 # try to stop the 7-highlander process
 
-PID=$(pgrep -f 7-highlander)
-
-# Check if the process exists
-if [ -z "$PID" ]; then
-    echo "7-highlander is not running."
-    exit 1
-fi
-
-# Send SIGTERM signal to the process
-echo "Sending SIGTERM to 7-highlander (PID: $PID)..."
-kill -SIGTERM $PID
-
-# Optional: Wait and check if it's still running
-sleep 1
-if ps -p $PID > /dev/null; then
-    echo "7-highlander (PID: $PID) is still running!"
-    echo "It truly is invincible!"
-else
-    echo "7-highlander has been terminated."
-fi
+kill $(pgrep -f "7-highlander")
