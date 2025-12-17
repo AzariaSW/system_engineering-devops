@@ -1,4 +1,17 @@
 #!/usr/bin/env bash
-# listing process with details in user oriented manner
 
-ps -e --forest -o user=USER,start_time=STARTED,cmd=CMD
+# Function to display processes in a hierarchical format
+display_process_tree() {
+    # Get all processes with detailed information using ps
+    # -e: select all processes
+    # -o: user-defined format with the specified fields
+    # --forest: display ASCII art process tree
+    # --sort: sort by pid to maintain hierarchy
+    ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,comm --forest --sort=pid
+}
+
+# Check if the script is being sourced or executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    # Main execution
+    display_process_tree
+fi
