@@ -2,4 +2,3 @@
 # Kill the 7-highlander process using SIGKILL (signal 9)
 
 pkill -SIGKILL -f 7-highlander
-echo "OK"
