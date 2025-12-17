@@ -10,5 +10,5 @@ for pid in $pids; do
     # Standard alternative: use 'pkill' if allowed
     echo "Stopping process $pid"
     # Using pkill (most accepted alternative to kill in assignments)
-    pkill -TERM -P $pid 2>/dev/null
+    pkill -TERM -P "$pid" 2>/dev/null
 done
