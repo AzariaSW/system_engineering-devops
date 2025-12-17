@@ -3,6 +3,8 @@
 
 echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   COMMAND"
 
+read -r user pid pcpu pmem vsz rss tty stat mon day hhmmss year cmdrest
+
 ps -eo user=,pid=,pcpu=,pmem=,vsz=,rss=,tty=,stat=,lstart=,cmd= --no-headers | while read -r user pid pcpu pmem vsz rss tty stat dow mon day hhmmss year cmdrest; do
     # Construct START as HH:MM:SS
     start_time="$hhmmss"
