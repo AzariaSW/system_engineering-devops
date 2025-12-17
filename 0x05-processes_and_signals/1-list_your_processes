@@ -10,12 +10,10 @@ print_tree() {
     children=$(ps -eo pid,ppid,user,%cpu,%mem,vsz,rss,tty,stat,start,time,cmd --no-headers | awk -v ppid="$parent_pid" '$2==ppid {print $0}')
 
     while IFS= read -r line; do
-        # Extract PID and CMD
         pid=$(echo "$line" | awk '{print $1}')
-        cmd=$(echo "$line" | awk '{for(i=12;i<=NF;i++) printf $i " "; print ""}')
 
-        # Print with indentation
-        echo "${indent}${line/$pid/$pid}"  
+        # Print the process line with indentation
+        echo "${indent}${line}"
 
         # Recurse into child processes
         print_tree "$pid" "   $indent"
