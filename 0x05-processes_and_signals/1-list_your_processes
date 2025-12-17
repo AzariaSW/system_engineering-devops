@@ -3,12 +3,4 @@
 
 echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   COMMAND"
 
-read -r user pid pcpu pmem vsz rss tty stat mon day hhmmss year cmdrest
-
-ps -eo user=,pid=,pcpu=,pmem=,vsz=,rss=,tty=,stat=,lstart=,cmd= --no-headers | while read -r user pid pcpu pmem vsz rss tty stat dow mon day hhmmss year cmdrest; do
-    # Construct START as HH:MM:SS
-    start_time="$hhmmss"
-    # Get full command
-    cmd="$cmdrest"
-    printf "%-10s %5s %4s %4s %6s %5s %-8s %-4s %s %s\n" "$user" "$pid" "$pcpu" "$pmem" "$vsz" "$rss" "$tty" "$stat" "$start_time" "$cmd"
-done
+ps -e -o user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest
