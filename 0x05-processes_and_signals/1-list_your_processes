@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-echo "USER    STARTED   COMMAND"
-ps -e -o user:8,time:8,comm --forest --no-headers | \
-    awk '{printf "%-8s %-9s ", $1, $2; for(i=3;i<=NF;i++) printf "%s ", $i; printf "\n"}'
+echo "USER"
+
+# Get all unique users running processes
+ps -e -o user --no-headers | sort -u
