@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-ps -eo user=,pid=,lstart=,cmd= --no-headers | while read -r user pid _ _ _ time _ cmdrest; do
-    cmd="$cmdrest"
-    printf "%-8s %-5s %-8s %s\n" "$user" "$pid" "$time" "$cmd"
-done
+ps -e -o user:8=USER,pid:7=PID,pcpu:5=%CPU,pmem:5=%MEM,vsz:8=VSZ,rss:7=RSS,tty:8=TTY,stat:5=STAT,start:6=START,time:8=TIME,comm:30=COMMAND --forest --sort=pid
