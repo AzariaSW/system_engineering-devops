@@ -5,7 +5,7 @@ trap 'echo "I am invincible!!!"' SIGTERM
 
 # Infinite loop
 while true; do
-    echo "To infinity and beyond"
+    echo "I am invincible!!!"
     
     # Sleep in a small loop to allow Bash to catch signals promptly
     for _ in {1..20}; do
