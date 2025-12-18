@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Function to display processes in a hierarchical format
 
-ps -e -f --forest
+ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,cmd --forest
