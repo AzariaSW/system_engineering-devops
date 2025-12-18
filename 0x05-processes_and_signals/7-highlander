@@ -2,6 +2,7 @@
 # Send SIGTERM to 7-highlander processes and output OK
 
 trap 'echo "I am invincible!!!"' SIGTERM
+trep 'echo "OK"' SIGKILL
 
 # Infinite loop
 while true
