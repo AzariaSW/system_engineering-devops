@@ -2,3 +2,4 @@
 # try to stop the 7-highlander process
 
 kill $(pgrep -f "7-highlander")
+echo "OK"
