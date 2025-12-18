@@ -1,22 +1,14 @@
 #!/usr/bin/env bash
 # Send SIGTERM to 7-highlander processes and output OK
 
-handle_term() {
-    while true; do
-        # Wait for SIGTERM to arrive
-        read -r signal
-        echo "I am invincible!!!"
-    done
-}
-
-# Open a file descriptor to catch signals
-exec 3<> >(handle_term)
-
-# Trap SIGTERM and send a dummy character to FD 3
-trap 'echo > /dev/fd/3' SIGTERM
+trap 'echo "I am invincible!!!"' SIGTERM
 
 # Infinite loop
 while true; do
     echo "To infinity and beyond"
-    sleep 2
+    
+    # Sleep in a small loop to allow Bash to catch signals promptly
+    for i in {1..20}; do
+        sleep 0.1
+    done
 done
